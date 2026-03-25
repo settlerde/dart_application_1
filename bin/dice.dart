@@ -7,7 +7,7 @@ void main() {
   List<int> results = [];
   int? maxRolls;
   int lastRoll = 0;
-  bool doubleSixFound = false;
+  bool doubleSix = false;
 
   // Eingabe mit Gültigkeitsprüfung
   do {
@@ -23,28 +23,28 @@ void main() {
 
   // Hauptschleife
   int counter = 0;
-  while (counter < maxRolls && !doubleSixFound) {
-    // + 1 wile random von 0 zählt
+  while (counter < maxRolls && !doubleSix) {
+    // + 1 (start point 0+1=1) weil random von 0 zählt
     int currentRoll = random.nextInt(6) + 1;
     results.add(currentRoll);
     counter++;
 
     if (currentRoll == 6 && lastRoll == 6) {
-      doubleSixFound = true;
+      doubleSix = true;
     } else {
-      lastRoll = currentRoll;
+      lastRoll = currentRoll; // lastRoll wird in Liste gespeichert
     }
   }
-
   // Ergebnisausgabe
+  String resultsNice = results.join(' - ');
   print('\n--- Ergebnis ---');
 
-  if (doubleSixFound) {
-    print('Erfolg! Zwei 6er nacheinander gewürfelt.');
+  if (doubleSix) {
+    print('Erfolg! Zwei 6 nacheinander gewürfelt.');
     print('Benötigte Würfe: $counter');
   } else {
-    print('Limit erreicht. Keine zwei 6er nacheinander dabei.');
+    print('Limit erreicht. Keine zwei 6 nacheinander dabei.');
   }
 
-  print('Alle gewürfelten Werte: $results');
+  print('Alle gewürfelten Werte: $resultsNice');
 }
