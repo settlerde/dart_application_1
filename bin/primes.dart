@@ -5,15 +5,20 @@ void main() {
 
   stdout.write('Geben Sie eine positive Zahl ein (von 2-100): ');
   String? input = stdin.readLineSync();
-  int? inZahl = int.tryParse(input ?? '');
+  int? inZahl = int.tryParse(input ?? '') ?? 0;
 
-  for (int i = 2; i <= inZahl!; i++) {
+  if (inZahl < 2 || inZahl > 100) {
+    print('Ungültige Eingabe! Bitte eine Zahl zwischen 2 und 100 eingeben.');
+    return;
+  }
+
+  for (int i = 2; i <= inZahl; i++) {
     if (isPrime(i)) {
       primes.add(i);
     }
   }
 
-  print(primes);
+  print('Primzahlen bis $inZahl: ${primes.join('- ')}');
 }
 
 bool isPrime(int number) {
